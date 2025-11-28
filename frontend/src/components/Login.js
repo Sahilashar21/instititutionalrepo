@@ -106,8 +106,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+      const API = process.env.REACT_APP_API_URL;
+
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", form);
+      const res = await axios.post(`${API}/api/auth/login`, form);
+
       login(res.data.user, res.data.token);
 
       const role = res.data.user.role;
