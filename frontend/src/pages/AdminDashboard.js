@@ -114,10 +114,11 @@ export default function AdminDashboard() {
     <div className="container">
       {/* Navbar */}
       <nav>
+        <button className="btn" onClick={() => navigate(-1)} aria-label="Go back">← Back</button>
         <div className="user-info">
           {user ? `Welcome, ${user.name}` : "Welcome, Admin"}
         </div>
-        <button onClick={handleLogout}>Logout</button>
+        <button className="btn" onClick={handleLogout} aria-label="Logout">Logout</button>
       </nav>
 
       {/* Upload New Resource Button */}
@@ -132,18 +133,17 @@ export default function AdminDashboard() {
 
       {/* Hero Carousel */}
       <section id="hero-carousel">
-        <h3>Hero Carousel</h3>
+        <h3>Gallery</h3>
         <HeroCarousel />
       </section>
 
       {/* Resources Section */}
       <section id="resources-section">
-        <h3>Resources Section</h3>
+        <h3>Resources</h3>
         <p>Explore, edit, and manage resources below.</p>
         <ResourcesSection role="admin" />
       </section>
 
-      <h2>Admin Dashboard - Protected Route</h2>
     </div>
   );
 }

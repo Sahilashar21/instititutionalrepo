@@ -84,7 +84,7 @@ const ResourceViewer = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${BACKEND_URL}/api/resources/${id}`);
+      await axios.delete(`${BACKEND_URL}/api/resources/${type}/${id}`);
       setResources(resources.filter((r) => r._id !== id));
     } catch (err) {
       console.error("Delete failed", err);
@@ -100,7 +100,7 @@ const ResourceViewer = () => {
   const handleSaveUpdate = async () => {
     try {
       const res = await axios.put(
-        `${BACKEND_URL}/api/resources/${editingResource._id}`,
+        `${BACKEND_URL}/api/resources/${type}/${editingResource._id}`,
         formData
       );
       setResources(
@@ -240,6 +240,7 @@ const ResourceViewer = () => {
                   {["admin", "clerk"].includes(role) && (
                     <div className="card-actions">
                       <button
+                        className="action-btn primary"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleUpdateClick(res);
@@ -248,6 +249,7 @@ const ResourceViewer = () => {
                         Update
                       </button>
                       <button
+                        className="action-btn"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDelete(res._id);
@@ -313,8 +315,8 @@ const ResourceViewer = () => {
                 />
               </div>
             ))}
-            <button onClick={handleSaveUpdate}>Save</button>
-            <button onClick={() => setEditingResource(null)}>Cancel</button>
+            <button className="action-btn primary" onClick={handleSaveUpdate}>Save</button>
+            <button className="action-btn" onClick={() => setEditingResource(null)}>Cancel</button>
           </div>
         </div>
       )}

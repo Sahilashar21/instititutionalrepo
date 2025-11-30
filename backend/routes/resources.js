@@ -68,10 +68,10 @@ router.get("/:type", async (req, res) => {
 // );
 
 // Update a resource (no auth, dev mode)
-router.put("/:id", resourceController.updateResource);
+router.put("/:type/:id", resourceController.updateResource);
 
 // Delete a resource (no auth, dev mode)
-router.delete("/:id", resourceController.deleteResource);
+router.delete("/:type/:id", resourceController.deleteResource);
 module.exports = router;
 
 

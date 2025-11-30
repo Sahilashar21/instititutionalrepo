@@ -42,7 +42,18 @@ const Navbar = ({ user, onLogout }) => {
               👋 {user.name}
             </Typography>
           )}
-          <Button color="inherit" onClick={onLogout}>
+          <Button
+            variant="contained"
+            onClick={onLogout}
+            sx={{
+              background: 'linear-gradient(90deg,var(--accent),#7c3aed)',
+              color: 'linear-gradient(90deg,var(--accent),#7c3aed)',
+              borderRadius: 1,
+              textTransform: 'none',
+              boxShadow: '0 8px 24px rgba(99,102,241,0.18)',
+              '&:hover': { opacity: 0.92 },
+            }}
+          >
             Logout
           </Button>
         </Box>

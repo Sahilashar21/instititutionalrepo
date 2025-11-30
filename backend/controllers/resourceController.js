@@ -59,40 +59,24 @@
 const QuestionPaper = require("../models/QuestionPaper");
 const ResearchPaper = require("../models/ResearchPaper");
 
-// exports.updateResource = async (req, res) => {
-//   try {
-//     const { type, id } = req.params;
-//     console.log("➡️ Updating resource:", type, id, req.body);   // debug log
-//     const Model = modelMap[type];
-//     if (!Model) return res.status(400).json({ error: "Invalid resource type" });
-
-//     const updated = await Model.findByIdAndUpdate(id, req.body, {
-//       new: true,
-//       runValidators: true,
-//     });
-
-//     if (!updated) return res.status(404).json({ error: "Resource not found" });
-
-//     res.json(updated);
-//   } catch (err) {
-//     console.error("❌ Update error:", err);
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-
+const modelMap = {
+  "question-papers": QuestionPaper,
+  "research-papers": ResearchPaper,
+};
 
 // UPDATE
 exports.updateResource = async (req, res) => {
   try {
-    const updated = await QuestionPaper.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true } // return updated doc
-    );
+    const { type, id } = req.params;
+    const Model = modelMap[type];
+    
+    if (!Model) return res.status(400).json({ message: "Invalid resource type" });
+    
+    const updated = await Model.findByIdAndUpdate(id, req.body, { new: true });
     if (!updated) return res.status(404).json({ message: "Resource not found" });
     res.json(updated);
   } catch (err) {
+    console.error("❌ Update error:", err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -100,10 +84,16 @@ exports.updateResource = async (req, res) => {
 // DELETE
 exports.deleteResource = async (req, res) => {
   try {
-    const deleted = await QuestionPaper.findByIdAndDelete(req.params.id);
+    const { type, id } = req.params;
+    const Model = modelMap[type];
+    
+    if (!Model) return res.status(400).json({ message: "Invalid resource type" });
+    
+    const deleted = await Model.findByIdAndDelete(id);
     if (!deleted) return res.status(404).json({ message: "Resource not found" });
     res.json({ message: "Resource deleted successfully" });
   } catch (err) {
+    console.error("❌ Delete error:", err);
     res.status(500).json({ error: err.message });
   }
 };

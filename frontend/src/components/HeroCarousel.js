@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 const images = [
   "/assets/image1.jpg",
   "/assets/image-6.jpg",
-  "/asstes/image3.jpg",
+  "/assets/image3.jpg",
   // Add more image paths if needed
 ];
 
