@@ -1,8 +1,14 @@
 // backend/models/QuestionPaper.js
 const mongoose = require("mongoose");
 
+// accessionNumber: { type: String, unique: true }
+
 const questionPaperSchema = new mongoose.Schema({
-  accessionNumber: { type: String, unique: true },
+  accessionNumber: {
+  type: String,
+  required: true,
+  unique: true,
+},
   year: String,
   course: String,
   semester: String,

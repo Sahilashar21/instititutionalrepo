@@ -1,8 +1,14 @@
 // backend/models/ResearchPaper.js
 const mongoose = require("mongoose");
 
+// accessionNumber: { type: String, unique: true,required: true },
+
 const researchPaperSchema = new mongoose.Schema({
-  accessionNumber: { type: String, unique: true,required: true },
+  accessionNumber: {
+  type: String,
+  required: true,
+  unique: true,
+},
   title: String,
   author: String,
   abstract: String,
