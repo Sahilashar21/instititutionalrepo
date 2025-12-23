@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
-const auth = require("./middleware/authMiddleware");
+const { authMiddleware: auth } = require("./middleware/authMiddleware");
 const roleMiddleware = require("./middleware/roleMiddleware");
 
 const authRoutes = require("./routes/auth"); // 🔐 Auth routes (login, etc.)
@@ -16,7 +16,6 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-mongodb://localhost:27017/institutional_repo
 
 // 🧠 MongoDB Connection
 // mongoose.connect("mongodb+srv://sahilashar21:LOBqKPV3GcmxNEsJ@cluster0.qbnh7lv.mongodb.net/library?retryWrites=true&w=majority&appName=Cluster0", 
@@ -36,13 +35,13 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 
 // 🧪 Protected test routes
-app.get("/api/admin-only", auth, roleMiddleware("admin"), (req, res) => {
-  res.send("Welcome Admin!");
-});
+// app.get("/api/admin-only", auth, roleMiddleware("admin"), (req, res) => {
+//   res.send("Welcome Admin!");
+// });
 
-app.get("/api/user-dashboard", auth, (req, res) => {
-  res.send(`Hello ${req.user.role}, you are logged in.`);
-});
+// app.get("/api/user-dashboard", auth, (req, res) => {
+//   res.send(`Hello ${req.user.role}, you are logged in.`);
+// });
 
 const adminResourceRoutes = require("./routes/adminResources");
 app.use("/api/admin/resources", adminResourceRoutes);
