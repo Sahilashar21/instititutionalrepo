@@ -28,18 +28,18 @@ export default function ProtectedRoute({ children, role }) {
   const { user } = useContext(AuthContext);
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
   // Allow multiple roles (string OR array)
   if (role) {
     if (Array.isArray(role)) {
       if (!role.includes(user.role)) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/" />;
       }
     } else {
       if (user.role !== role) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/" />;
       }
     }
   }
